@@ -59,3 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// AVISO INSTANTÁNEO A DISCORD AL ENTRAR A LA WEB
+(function notificardiscord() {
+    // ⚠️ Reemplaza esta URL por la URL de tu Webhook de Discord
+    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
+
+    // Evita enviar notificaciones si estás probando la web localmente (en tu PC)
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
+
+    // Control para enviar máximo 1 aviso por sesión (evita spam si el usuario recarga)
+    if (sessionStorage.getItem("discord_notified")) return;
+
+    const data = {
+        embeds: [{
+            title: "🎬 ¡Alguien acaba de entrar a tu Videobook!",
+            color: 9133302, // Color violeta en código decimal
+            fields: [
+                { name: "Página cargada", value: window.location.href, inline: true },
+                { name: "Dispositivo", value: navigator.userAgent.includes("Mobile") ? "📱 Móvil" : "💻 Ordenador", inline: true }
+            ],
+            timestamp: new Date().toISOString()
+        }]
+    };
+
+    fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    }).then(() => {
+        sessionStorage.setItem("discord_notified", "true");
+    }).catch(err => console.error("Error al enviar notificación a Discord:", err));
+})();
