@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // AVISO DETALLADO A DISCORD (FILTRANDO BOTS Y VISITAS PROPIAS)
 (function notificardiscord() {
-    const DISCORD_WEBHOOK_URL = "PEGA_AQUI_TU_URL_DE_WEBHOOK"; 
+    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
 
     // 1. FILTRO DE VISITAS PROPIAS: Desactiva notificaciones si estás en modo pruebas/desarrollo
     // Si quieres bloquear tus visitas desde tu móvil o PC cuando estés en la web real,
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Enviar embed detallado a Discord
             const data = {
                 embeds: [{
-                    title: "🎬 ¡Nueva visita en tu Videobook!",
+                    title: "🎬 ¡Nueva visita en tu Videobook! @everyone",
                     color: 9133302, // Violeta
                     fields: [
                         { name: "📍 Ubicación", value: `${ciudad}, ${pais}`, inline: true },
