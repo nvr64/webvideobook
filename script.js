@@ -59,34 +59,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-// AVISO INSTANTÁNEO A DISCORD AL ENTRAR A LA WEB
+// AVISO DETALLADO A DISCORD (FILTRANDO BOTS Y VISITAS PROPIAS)
 (function notificardiscord() {
-    // ⚠️ Reemplaza esta URL por la URL de tu Webhook de Discord
-    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
+    const DISCORD_WEBHOOK_URL = "PEGA_AQUI_TU_URL_DE_WEBHOOK"; 
 
-    // Evita enviar notificaciones si estás probando la web localmente (en tu PC)
+    // 1. FILTRO DE VISITAS PROPIAS: Desactiva notificaciones si estás en modo pruebas/desarrollo
+    // Si quieres bloquear tus visitas desde tu móvil o PC cuando estés en la web real,
+    // puedes añadir en la URL de tu navegador '?admin=true' una vez (ej: tuweb.com/?admin=true)
+    if (localStorage.getItem("ignore_my_visits") === "true" || window.location.search.includes("admin=true")) {
+        localStorage.setItem("ignore_my_visits", "true");
+        return;
+    }
+
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
 
-    // Control para enviar máximo 1 aviso por sesión (evita spam si el usuario recarga)
+    // 2. FILTRO DE BOTS Y RASTREADORES (Google Analytics, WhatsApp, spiders, etc.)
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isBot = /bot|google|crawler|spider|robot|crawling|preview|facebookexternalhit|whatsapp|telegrambot/i.test(userAgent);
+    if (isBot) return;
+
+    // 3. CONTROL DE SESIÓN (Máximo 1 aviso por usuario/sesión)
     if (sessionStorage.getItem("discord_notified")) return;
 
-    const data = {
-        embeds: [{
-            title: "🎬 ¡Alguien acaba de entrar a tu Videobook! @everyone",
-            color: 9133302, // Color violeta en código decimal
-            fields: [
-                { name: "Página cargada", value: window.location.href, inline: true },
-                { name: "Dispositivo", value: navigator.userAgent.includes("Mobile") ? "📱 Móvil" : "💻 Ordenador", inline: true }
-            ],
-            timestamp: new Date().toISOString()
-        }]
-    };
+    // 4. OBTENER UBICACIÓN DE LA VISITA (Vía API gratuitaipapi.co)
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(ipData => {
+            const ciudad = ipData.city || "Desconocida";
+            const pais = ipData.country_name || "Desconocido";
+            const ip = ipData.ip || "Oculta";
+            const proveedor = ipData.org || "Desconocido";
 
-    fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    }).then(() => {
-        sessionStorage.setItem("discord_notified", "true");
-    }).catch(err => console.error("Error al enviar notificación a Discord:", err));
+            // Enviar embed detallado a Discord
+            const data = {
+                embeds: [{
+                    title: "🎬 ¡Nueva visita en tu Videobook!",
+                    color: 9133302, // Violeta
+                    fields: [
+                        { name: "📍 Ubicación", value: `${ciudad}, ${pais}`, inline: true },
+                        { name: "🌐 IP / Proveedor", value: `${ip} (${proveedor})`, inline: true },
+                        { name: "📱 Dispositivo", value: navigator.userAgent.includes("Mobile") ? "Móvil / Tablet" : "Ordenador", inline: true },
+                        { name: "🔗 URL", value: window.location.href, inline: false }
+                    ],
+                    footer: { text: "Sistema de notificaciones — Nicolás Vaz-Romero" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            return fetch(DISCORD_WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+        })
+        .then(() => {
+            sessionStorage.setItem("discord_notified", "true");
+        })
+        .catch(err => console.error("Error en notificación de Discord:", err));
 })();
