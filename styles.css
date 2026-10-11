@@ -413,3 +413,9 @@ footer {
     .about-grid { grid-template-columns: 1fr; }
     .grid-2 { grid-template-columns: 1fr; }
 }
+@media (max-width: 600px) {
+    .nav-btn, .tab-btn, nav a {
+        font-size: 0.85rem; /* Reduce un poco el tamaño de la letra */
+        padding: 8px 10px;  /* Reduce el espacio interno de los botones */
+    }
+}
