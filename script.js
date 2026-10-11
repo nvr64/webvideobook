@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = {
         embeds: [{
-            title: "🎬 ¡Alguien acaba de entrar a tu Videobook!",
+            title: "🎬 ¡Alguien acaba de entrar a tu Videobook! @everyone",
             color: 9133302, // Color violeta en código decimal
             fields: [
                 { name: "Página cargada", value: window.location.href, inline: true },
