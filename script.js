@@ -59,61 +59,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-// AVISO DETALLADO A DISCORD (FILTRANDO BOTS Y VISITAS PROPIAS)
+// AVISO A DISCORD (100% RESPETUOSO CON LA PRIVACIDAD Y SIN DUPLICADOS)
 (function notificardiscord() {
-    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
+    const DISCORD_WEBHOOK_URL = "PEGA_AQUI_TU_URL_DE_WEBHOOK"; 
 
-    // 1. FILTRO DE VISITAS PROPIAS: Desactiva notificaciones si estás en modo pruebas/desarrollo
-    // Si quieres bloquear tus visitas desde tu móvil o PC cuando estés en la web real,
-    // puedes añadir en la URL de tu navegador '?admin=true' una vez (ej: tuweb.com/?admin=true)
+    // 1. Bloquear visitas propias
     if (localStorage.getItem("ignore_my_visits") === "true" || window.location.search.includes("admin=true")) {
         localStorage.setItem("ignore_my_visits", "true");
         return;
     }
 
+    // 2. Bloquear en entorno local
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
 
-    // 2. FILTRO DE BOTS Y RASTREADORES (Google Analytics, WhatsApp, spiders, etc.)
+    // 3. Bloquear rastreadores y bots
     const userAgent = navigator.userAgent.toLowerCase();
     const isBot = /bot|google|crawler|spider|robot|crawling|preview|facebookexternalhit|whatsapp|telegrambot/i.test(userAgent);
     if (isBot) return;
 
-    // 3. CONTROL DE SESIÓN (Máximo 1 aviso por usuario/sesión)
-    if (sessionStorage.getItem("discord_notified")) return;
+    // 4. CONTROL ANTI-DUPLICADOS RIGUROSO
+    // Marcamos la sesión INMEDIATAMENTE antes de enviar nada para evitar envíos dobles por clics rápidos
+    if (sessionStorage.getItem("discord_notified") === "true") return;
+    sessionStorage.setItem("discord_notified", "true");
 
-    // 4. OBTENER UBICACIÓN DE LA VISITA (Vía API gratuitaipapi.co)
-    fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(ipData => {
-            const ciudad = ipData.city || "Desconocida";
-            const pais = ipData.country_name || "Desconocido";
-            const ip = ipData.ip || "Oculta";
-            const proveedor = ipData.org || "Desconocido";
+    // 5. Obtener datos genéricos (no personales) del navegador
+    const zonaHoraria = Intl.DateTimeFormat().resolvedOptions().timeZone || "Desconocida";
+    const idioma = navigator.language || "Desconocido";
+    const esMovil = /mobile|android|iphone|ipad/i.test(userAgent);
 
-            // Enviar embed detallado a Discord
-            const data = {
-                embeds: [{
-                    title: "🎬 ¡Nueva visita en tu Videobook! @everyone",
-                    color: 9133302, // Violeta
-                    fields: [
-                        { name: "📍 Ubicación", value: `${ciudad}, ${pais}`, inline: true },
-                        { name: "🌐 IP / Proveedor", value: `${ip} (${proveedor})`, inline: true },
-                        { name: "📱 Dispositivo", value: navigator.userAgent.includes("Mobile") ? "Móvil / Tablet" : "Ordenador", inline: true },
-                        { name: "🔗 URL", value: window.location.href, inline: false }
-                    ],
-                    footer: { text: "Sistema de notificaciones — Nicolás Vaz-Romero" },
-                    timestamp: new Date().toISOString()
-                }]
-            };
+    const data = {
+        embeds: [{
+            title: "🎬 ¡Nueva visita en tu Videobook!",
+            color: 9133302, // Violeta
+            fields: [
+                { name: "📱 Dispositivo", value: esMovil ? "Móvil / Tablet" : "Ordenador", inline: true },
+                { name: "🌐 Zona / Idioma", value: `${zonaHoraria} (${idioma})`, inline: true },
+                { name: "🔗 Sección de Entrada", value: window.location.hash || "Inicio", inline: false }
+            ],
+            footer: { text: "Aviso de visita anónima — Nicolás Vaz-Romero" },
+            timestamp: new Date().toISOString()
+        }]
+    };
 
-            return fetch(DISCORD_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-        })
-        .then(() => {
-            sessionStorage.setItem("discord_notified", "true");
-        })
-        .catch(err => console.error("Error en notificación de Discord:", err));
+    fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    }).catch(err => console.error("Error al notificar en Discord:", err));
 })();
