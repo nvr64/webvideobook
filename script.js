@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // AVISO A DISCORD (100% RESPETUOSO CON LA PRIVACIDAD Y SIN DUPLICADOS)
 (function notificardiscord() {
-    const DISCORD_WEBHOOK_URL = "PEGA_AQUI_TU_URL_DE_WEBHOOK"; 
+    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
 
     // 1. Bloquear visitas propias
     if (localStorage.getItem("ignore_my_visits") === "true" || window.location.search.includes("admin=true")) {
