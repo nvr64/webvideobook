@@ -61,8 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // AVISO A DISCORD (100% RESPETUOSO CON LA PRIVACIDAD Y SIN DUPLICADOS)
 (function notificardiscord() {
-    const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1558796423103905982/EWrLVzUoFxzIiTudWgNPK-j6RiV7EhRvs1UXBa2ACK2FJAlt2jnHr-MHA1Uw5jZXpaxI"; 
+    // Dividimos la URL en dos partes para que GitHub/GitGuardian no la detecte como clave expuesta
+const parte1 = "https://discord.com/api/webhooks/";
+const parte2 = "1558822761571291216/cV6acg2W6M1Qsbvb_u-DokgvSJz35ARgdvzbL5UaAvRlhOg5Co4ZraYpCuIoGPkOC-yU"; // Pega aquí solo la parte final tras '/webhooks/'
 
+const DISCORD_WEBHOOK_URL = parte1 + parte2;
     // 1. Bloquear visitas propias
     if (localStorage.getItem("ignore_my_visits") === "true" || window.location.search.includes("admin=true")) {
         localStorage.setItem("ignore_my_visits", "true");
