@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolás Vaz-Romero Porter | Videobook & Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navegación Fija e Intuitiva -->
+    <header class="navbar">
+        <div class="logo">NICOLÁS VAZ-ROMERO PORTER</div>
+        <nav>
+            <ul class="nav-links">
+                <li><button class="nav-btn active" data-tab="inicio">Inicio</button></li>
+                <li><button class="nav-btn" data-tab="videos">Vídeos / Reel</button></li>
+                <li><button class="nav-btn" data-tab="fotos">Fotos / Book</button></li>
+                <li><button class="nav-btn" data-tab="sobre-mi">Experiencia & Sobre Mí</button></li>
+            </ul>
+        </nav>
+        <a href="mailto:tuemail@ejemplo.com" class="btn btn-contact">Contactar</a>
+    </header>
+
+    <main class="main-content">
+
+        <!-- PESTAÑA 1: INICIO (PORTADA CINEMATOGRÁFICA CON VÍDEO/FONDO) -->
+        <section id="inicio" class="tab-content active">
+            <div class="hero-cinematic">
+                
+                <!-- Fondo de Vídeo Muteado / Fondo Visual -->
+                <div class="hero-background">
+                    <!-- Puedes usar un vídeo mp4 corto de fondo (silenciado) o dejar la imagen -->
+                    <video autoplay loop muted playsinline poster="fotos/foto1.jpg" class="hero-video-bg">
+                        <source src="videofondo.MP4" type="video/mp4">
+                    </video>
+                    <div class="hero-overlay"></div>
+                </div>
+
+                <!-- Contenido Principal sobre el Fondo -->
+                <div class="hero-body">
+                    <span class="badge">Portfolio & Videobook Oficial</span>
+                    <h1 class="actor-name">Nicolás Vaz-Romero Porter</h1>
+                    <p class="hero-subtitle">Actor / Performer Audiovisual</p>
+                    
+                    <div class="hero-actions">
+                        <button class="btn btn-primary switch-tab-btn" data-target="videos">Ver Videobook</button>
+                        <button class="btn btn-secondary switch-tab-btn" data-target="fotos">Ver Book Fotográfico</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: VÍDEOS -->
+        <section id="videos" class="tab-content">
+            <h2 class="page-title">Videobook & Escenas</h2>
+            <p class="page-subtitle">Reproduce los vídeos directamente desde YouTube.</p>
+            
+            <!-- Video Principal (Showreel) -->
+            <div class="featured-video-card">
+                <h3>Showreel Principal (2026)</h3>
+                <div class="video-container">
+                    <iframe src="https://www.youtube-nocookie.com/embed/wVOPm8Ji1EA" title="Showreel Principal" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Escenas -->
+            <h3 class="subsection-title">Todas las Escenas & Trabajos</h3>
+            <div class="grid grid-2">
+                <div class="card video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/WZbFYKjehGg" title="Escena Dramática" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body">
+                        <h4>Escena Dramática 1</h4>
+                        <p>Cortometraje / Registro dramático intenso.</p>
+                    </div>
+                </div>
+
+                <div class="card video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/ID_DE_TU_VIDEO_2" title="Escena Comedia" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body">
+                        <h4>Escena Comedia / Anuncio</h4>
+                        <p>Anuncio publicitario / Tono fresco y divertido.</p>
+                    </div>
+                </div>
+
+                <div class="card video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/ID_DE_TU_VIDEO_3" title="Monólogo" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body">
+                        <h4>Monólogo de Teatro</h4>
+                        <p>Interpretación de texto clásico / contemporáneo.</p>
+                    </div>
+                </div>
+
+                <div class="card video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/ID_DE_TU_VIDEO_4" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body">
+                        <h4>Aparición en Serie TV</h4>
+                        <p>Escena de diálogo en serie de televisión.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: FOTOS -->
+        <section id="fotos" class="tab-content">
+            <h2 class="page-title">Book Fotográfico Complete</h2>
+            <p class="page-subtitle">Haz clic en cualquier fotografía para hacerla gigante a pantalla completa.</p>
+
+            <div class="grid grid-3">
+                <div class="card photo-card">
+                    <img src="fotos/foto1.jpg" alt="Headshot Principal" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Headshot / Primer Plano</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto2.jpg" alt="Plano Entero" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Plano Entero</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto3.jpg" alt="Editorial / Moda" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Editorial / Caracterización</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto4.jpg" alt="Plano Medio Expresivo" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Plano Medio Expresivo</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto5.jpeg" alt="Foto en Rodaje" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Foto en Rodaje / Set</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto6.jpg" alt="Retrato Blanco y Negro" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Blanco y Negro</h4>
+                    </div>
+                </div>
+                <div class="card photo-card">
+                    <img src="fotos/foto7.jpg" alt="Foto en Rodaje" class="lightbox-trigger">
+                    <div class="card-body">
+                        <h4>Foto en Rodaje / Set</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 4: EXPERIENCIA & SOBRE MÍ -->
+        <section id="sobre-mi" class="tab-content">
+            <h2 class="page-title">Sobre Mí & Experiencia</h2>
+
+            <div class="about-grid">
+                <!-- Columna Izquierda: Bio y Datos -->
+                <div class="bio-box">
+                    <h3>Biografía</h3>
+                    <p>¡Hola! Soy Nicolás Vaz-Romero Porter. Apasionado por la interpretación, el cine y las artes escénicas. Cuento con formación en arte dramático y amplia experiencia en rodajes y proyectos teatrales.</p>
+
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <span class="stat-label">Pronombres</span>
+                            <span class="stat-value">Él / Masculino</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Altura</span>
+                            <span class="stat-value">1,84 m</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ojos</span>
+                            <span class="stat-value">Castaños</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Idiomas</span>
+                            <span class="stat-value">Español, Catalán, Inglés</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Currículum / Trayectoria -->
+                <div class="experience-box">
+                    <h3>Trayectoria Destacada</h3>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-year">2025 - 2026</span>
+                            <h4>"Nombre del Proyecto / Película"</h4>
+                            <p class="role">Papel Secundario — Dir. Director Famoso</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2024</span>
+                            <h4>"Serie de TV Destacada"</h4>
+                            <p class="role">Episódico — Cadena / Plataforma</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2023</span>
+                            <h4>"Obra de Teatro"</h4>
+                            <p class="role">Protagonista — Teatro Principal</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">Formación</h3>
+                    <ul class="skills-list">
+                        <li>Diplomatura en Interpretación ante de Cámara en Estudi Karloff (Barcelona)</li>
+                        <li>Curso joven de Interpretación en Estudi Karloff</li>
+                        <li>Taller de Esgrima Escénica</li>
+                        <li>Experiencia en teatro</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Vista ampliada">
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Nicolás Vaz-Romero Porter. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
