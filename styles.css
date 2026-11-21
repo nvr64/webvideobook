@@ -478,26 +478,127 @@ footer {
     gap: 20px;
 }
 
-@media (max-width: 900px) {
-    .reel-showcase-layout {
-        grid-template-columns: 1fr;
+/* EVITAR DESBORDAMIENTOS EN MÓVILES Y TABLETS */
+html, body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+.main-content {
+    touch-action: pan-y;
+}
+
+.grid-2,
+.grid-3,
+.languages-grid,
+.reel-showcase-layout,
+.about-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 680px) {
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .reel-side-photos {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .languages-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 560px) {
+@media (min-width: 901px) {
+    .reel-showcase-layout {
+        grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    }
+
     .reel-side-photos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .languages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .about-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* TIPOGRAFÍA Y ESPACIADO TÁCTIL EN MÓVIL / TABLET */
+.page-title {
+    font-size: clamp(1.55rem, 5vw, 2.2rem);
+    line-height: 1.2;
+}
+
+.subsection-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+}
+
+.nav-btn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close {
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 14px;
+    right: 16px;
+}
+
+@media (max-width: 820px) {
+    .navbar {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+
+    .nav-links {
+        justify-content: flex-start;
+        gap: 4px;
+        padding: 4px;
+        scrollbar-width: none;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+    }
+
+    .main-content {
+        margin: 14px auto 28px;
+        padding: 0 14px;
+    }
+
+    .card-body {
+        padding: 14px;
+    }
+
+    .bio-box,
+    .experience-box,
+    .featured-video-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-box {
         grid-template-columns: 1fr;
     }
 
-    .language-column {
-        padding: 14px;
+    .compact-photo img {
+        height: 220px;
     }
 }
