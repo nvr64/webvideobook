@@ -1,23 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. NAVEGACIÓN POR PESTAÑAS (SPA)
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const switchTabButtons = document.querySelectorAll('.switch-tab-btn');
+    // 1. NAVEGACIÓN POR PESTAÑAS (SPA) + SWIPE TÁCTIL
+    const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
+    const tabContents = Array.from(document.querySelectorAll('.tab-content'));
+    const switchTabButtons = Array.from(document.querySelectorAll('.switch-tab-btn'));
+    const tabOrder = navButtons.map(btn => btn.getAttribute('data-tab')).filter(Boolean);
+    const swipeArea = document.querySelector('.main-content');
+    const lightbox = document.getElementById('lightbox');
+
+    function centerActiveNavBtn(btn) {
+        if (!btn) return;
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
 
     function switchTab(targetTabId) {
-        // Desactivar pestañas y botones
+        if (!targetTabId) return;
+
         tabContents.forEach(tab => tab.classList.remove('active'));
         navButtons.forEach(btn => btn.classList.remove('active'));
 
-        // Activar pestaña solicitada
         const activeTab = document.getElementById(targetTabId);
         const activeNavBtn = document.querySelector(`.nav-btn[data-tab="${targetTabId}"]`);
 
         if (activeTab) activeTab.classList.add('active');
-        if (activeNavBtn) activeNavBtn.classList.add('active');
+        if (activeNavBtn) {
+            activeNavBtn.classList.add('active');
+            centerActiveNavBtn(activeNavBtn);
+        }
 
-        // Desplazarse arriba suavemente
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -35,8 +45,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Deslizamiento horizontal táctil entre pestañas (móviles y tablets)
+    if (swipeArea && tabOrder.length > 1) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let ignoreSwipe = false;
+
+        swipeArea.addEventListener('touchstart', (e) => {
+            if (!e.touches || e.touches.length !== 1) return;
+            const lightboxOpen = lightbox && getComputedStyle(lightbox).display !== 'none';
+            const insideIframe = e.target.closest('iframe');
+
+            ignoreSwipe = lightboxOpen || Boolean(insideIframe) || window.innerWidth > 1024;
+            if (ignoreSwipe) return;
+
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        swipeArea.addEventListener('touchend', (e) => {
+            if (ignoreSwipe || !e.changedTouches || e.changedTouches.length !== 1) return;
+
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+
+            const minSwipeDistance = 70;
+            const isHorizontalDominant = Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > Math.abs(deltaY) * 1.35;
+
+            if (!isHorizontalDominant) return;
+
+            const currentBtn = document.querySelector('.nav-btn.active');
+            const currentTab = currentBtn ? currentBtn.getAttribute('data-tab') : tabOrder[0];
+            const currentIndex = tabOrder.indexOf(currentTab);
+            if (currentIndex === -1) return;
+
+            // Deslizar hacia la izquierda -> siguiente pestaña; deslizar hacia la derecha -> anterior
+            if (deltaX < 0 && currentIndex < tabOrder.length - 1) {
+                switchTab(tabOrder[currentIndex + 1]);
+            } else if (deltaX > 0 && currentIndex > 0) {
+                switchTab(tabOrder[currentIndex - 1]);
+            }
+        }, { passive: true });
+    }
+
     // 2. LIGHTBOX DE FOTOS
-    const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
     const photoTriggers = document.querySelectorAll('.lightbox-trigger');
