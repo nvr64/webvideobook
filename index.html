@@ -16,13 +16,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navegación Fija e Intuitiva -->
+<!-- Navegación Fija e Intuitiva -->
     <header class="navbar">
         <div class="logo">NICOLÁS VAZ-ROMERO PORTER</div>
         <nav>
             <ul class="nav-links">
-                <li><button class="nav-btn active" data-tab="inicio">Inicio</button></li>
-                <li><button class="nav-btn" data-tab="videos">Vídeos / Reel</button></li>
+                <li><button class="nav-btn active" data-tab="videos">Vídeos / Reel</button></li>
                 <li><button class="nav-btn" data-tab="fotos">Fotos / Book</button></li>
                 <li><button class="nav-btn" data-tab="sobre-mi">Experiencia & Sobre Mí</button></li>
             </ul>
@@ -32,132 +31,134 @@
 
     <main class="main-content">
 
-        <!-- PESTAÑA 1: INICIO (PORTADA CINEMATOGRÁFICA CON VÍDEO/FONDO) -->
-        <section id="inicio" class="tab-content active">
-            <div class="hero-cinematic">
-                
-                <!-- Fondo de Vídeo Muteado / Fondo Visual -->
-                <div class="hero-background">
-                    <!-- Puedes usar un vídeo mp4 corto de fondo (silenciado) o dejar la imagen -->
-                    <video autoplay loop muted playsinline poster="fotos/foto1.webp" class="hero-video-bg">
-                        <source src="videofondo.MP4" type="video/mp4">
-                    </video>
-                    <div class="hero-overlay"></div>
-                </div>
-
-                <!-- Contenido Principal sobre el Fondo -->
-                <div class="hero-body">
-                    <span class="badge">Portfolio & Videobook Oficial</span>
-                    <h1 class="actor-name">Nicolás Vaz-Romero Porter</h1>
-                    <p class="hero-subtitle">Actor / Performer Audiovisual</p>
-                    
-                    <div class="hero-actions">
-                        <button class="btn btn-primary switch-tab-btn" data-target="videos">Ver Videobook</button>
-                        <button class="btn btn-secondary switch-tab-btn" data-target="fotos">Ver Book Fotográfico</button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- PESTAÑA 2: VÍDEOS -->
-        <section id="videos" class="tab-content">
+        <!-- PESTAÑA PRINCIPAL: VÍDEOS & SHOWREEL -->
+        <section id="videos" class="tab-content active">
             <h2 class="page-title">Videobook & Escenas</h2>
-            <p class="page-subtitle">Reproduce los vídeos directamente desde YouTube.</p>
-            
-            <!-- Video Principal (Showreel) -->
-            <div class="featured-video-card">
-                <h3>Showreel Principal (2026)</h3>
-                <div class="video-container">
-                    <iframe src="https://www.youtube-nocookie.com/embed/wVOPm8Ji1EA?vq=hd1080&rel=0&modestbranding=1" title="Showreel Principal" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p class="page-subtitle">Showreel principal, fotografías destacadas y escenas organizadas por idioma.</p>
+
+            <!-- BLOQUE SUPERIOR: SHOWREEL + FOTOS DESTACADAS -->
+            <div class="reel-showcase-layout">
+                <div class="featured-video-card">
+                    <h3>Showreel Principal (2026)</h3>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/wVOPm8Ji1EA?vq=hd1080&rel=0&modestbranding=1" title="Showreel Principal" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
                 </div>
+
+                <aside class="reel-side-photos">
+                    <div class="card photo-card compact-photo">
+                        <img src="fotos/foto1.webp" alt="Nicolás Vaz-Romero - Retrato Principal" class="lightbox-trigger">
+                        <div class="card-body">
+                            <h4>Retrato Principal</h4>
+                            <p>Haz clic para ampliar</p>
+                        </div>
+                    </div>
+                    <div class="card photo-card compact-photo">
+                        <img src="fotos/foto2.webp" alt="Plano Entero" class="lightbox-trigger">
+                        <div class="card-body">
+                            <h4>Plano Entero</h4>
+                            <p>Haz clic para ampliar</p>
+                        </div>
+                    </div>
+                </aside>
             </div>
 
-            <!-- Escenas -->
-            <h3 class="subsection-title">Todas las Escenas & Trabajos</h3>
-            <div class="grid grid-2">
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/wVOPm8Ji1EA?vq=hd1080&rel=0&modestbranding=1" title="Escena Dramática" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena Dramática 1</h4>
-                        <p>Registro dramático intenso. Escena corta cena.</p>
+            <!-- DOS COLUMNAS POR IDIOMA: CASTELLANO (IZQUIERDA) / CATALÁN (DERECHA) -->
+            <div class="languages-grid">
+                <!-- COLUMNA IZQUIERDA: CASTELLANO -->
+                <div class="language-column">
+                    <h3 class="subsection-title lang-heading">Escenas en Castellano</h3>
+                    <div class="language-videos-stack">
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/wVOPm8Ji1EA?vq=hd1080&rel=0&modestbranding=1" title="Escena Dramática 1 (Castellano)" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Dramática 1 · Castellano</h4>
+                                <p>Registro dramático intenso. Escena corta cena.</p>
+                            </div>
+                        </div>
+
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/5pIwO-vL5gA?vq=hd1080&rel=0&modestbranding=1" title="Escena Dramática Kramer vs Kramer (Castellano)" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Dramática · Castellano</h4>
+                                <p>Escena intensa de Kramer vs Kramer.</p>
+                            </div>
+                        </div>
+
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/hMPNk5hUCV0?vq=hd1080&rel=0&modestbranding=1" title="Monólogo Dramático 2 (Castellano)" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Monólogo Dramático 2 · Castellano</h4>
+                                <p>Monólogo dramático con trabajo de improvisación.</p>
+                            </div>
+                        </div>
+
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/cgZgQpyyAWo?vq=hd1080&rel=0&modestbranding=1" title="Escena Cabaña 2 (Castellano)" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Cabaña 2 · Castellano</h4>
+                                <p>Escena de comedia en cabaña un año después.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/WZbFYKjehGg?vq=hd1080&rel=0&modestbranding=1" title="Escena Comedia" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Monologo Emotivo en Català</h4>
-                        <p>Monologo Emotivo de La Grande Bellezza</p>
-                    </div>
-                </div>
+                <!-- COLUMNA DERECHA: CATALÁN -->
+                <div class="language-column">
+                    <h3 class="subsection-title lang-heading">Escenas en Català</h3>
+                    <div class="language-videos-stack">
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/WZbFYKjehGg?vq=hd1080&rel=0&modestbranding=1" title="Monòleg Emotiu en Català" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Monòleg Emotiu · Català</h4>
+                                <p>Monòleg emotiu de La Grande Bellezza (en català).</p>
+                            </div>
+                        </div>
 
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/5pIwO-vL5gA?vq=hd1080&rel=0&modestbranding=1" title="Monólogo" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena Dramática</h4>
-                        <p>Escena intensa de Kramer vs Kramer</p>
-                    </div>
-                </div>
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/gnvVg13_s-w?vq=hd1080&rel=0&modestbranding=1" title="Escena Romàntica en Català" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Romàntica · Català</h4>
+                                <p>Escena curta de Nadal dramàtica/romàntica (en català).</p>
+                            </div>
+                        </div>
 
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/gnvVg13_s-w?vq=hd1080&rel=0&modestbranding=1" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena romántica (Català)</h4>
-                        <p>Escena corta de navidad Dramática/Romántica</p>
-                    </div>
-                </div>
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/GF_CsP16FkY?vq=hd1080&rel=0&modestbranding=1&t=309" title="Escena Teatre Pulmons en Català" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Teatre Pulmons · Català</h4>
+                                <p>Escena de teatre de comèdia (en català).</p>
+                            </div>
+                        </div>
 
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/GF_CsP16FkY?vq=hd1080&rel=0&modestbranding=1&t=309" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena teatro Pulmons (Català)</h4>
-                        <p>Escena de teatro comedia</p>
-                    </div>
-                </div>
-
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/hMPNk5hUCV0?vq=hd1080&rel=0&modestbranding=1" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Monologo Dramático 2</h4>
-                        <p>Monologo drama improvisacion</p>
-                    </div>
-                </div>
-
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/9670p7xtvEU?vq=hd1080&rel=0&modestbranding=1" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena Cabaña</h4>
-                        <p>Escena romántica en cabaña (Català)</p>
-                    </div>
-                </div>
-
-                <div class="card video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/cgZgQpyyAWo?vq=hd1080&rel=0&modestbranding=1" title="Serie TV" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h4>Escena Cabaña 2</h4>
-                        <p>Escena comedia en cabaña un año despues</p>
+                        <div class="card video-card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube-nocookie.com/embed/9670p7xtvEU?vq=hd1080&rel=0&modestbranding=1" title="Escena Cabana en Català" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h4>Escena Cabana · Català</h4>
+                                <p>Escena romàntica en cabana (en català).</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
+        
         <!-- PESTAÑA 3: FOTOS -->
         <section id="fotos" class="tab-content">
             <h2 class="page-title">Book Fotográfico Complete</h2>
